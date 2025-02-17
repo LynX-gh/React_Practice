@@ -19,26 +19,29 @@
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-const products = [
-  { title: 'Cabbage', isFruit: false, id: 1 },
-  { title: 'Garlic', isFruit: false, id: 2 },
-  { title: 'Apple', isFruit: true, id: 3 },
-];
+import { useState } from 'react';
 
-let App = function ShoppingList() {
-  const listItems = products.map(product =>
-    <li
-      key={product.id}
-      style={{
-        color: product.isFruit ? 'magenta' : 'darkgreen'
-      }}
-    >
-      {product.title}
-    </li>
+let App = function MyApp() {
+  return (
+    <div>
+      <h1>Counters that update separately</h1>
+      <MyButton />
+      <MyButton />
+    </div>
   );
+}
+
+function MyButton() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
 
   return (
-    <ul>{listItems}</ul>
+    <button onClick={handleClick}>
+      Clicked {count} times
+    </button>
   );
 }
 
@@ -99,6 +102,10 @@ ul {
   padding-inline-start: 20px;
 }
 
+button {
+  display: block;
+  margin-bottom: 5px;
+}
 
 </style>
 </html>
