@@ -20,7 +20,7 @@ function Board({xIsNext, squares, onPlay}) {
 
     var nextSquares = squares.slice();
     nextSquares[i] = xIsNext ? "X" : "O";
-    onPlay(nextSquares);
+    onPlay(nextSquares, i);
     handleBoardStatus(nextSquares);
   }
 
@@ -40,6 +40,7 @@ function Board({xIsNext, squares, onPlay}) {
         return nextSquares[a];
       }
     }
+    setWinIdx(Array(3).fill(null));
     return null;
   }
 
@@ -62,13 +63,16 @@ function Board({xIsNext, squares, onPlay}) {
 
 export default function Game() {
   const [ history, setHistory ] = useState([Array(9).fill(null)]);
-  const [currentMove, setCurrentMove] = useState(0);
+  const [ moveHistory, setMoveHistory ] = useState([]);
+  const [ currentMove, setCurrentMove ] = useState(0);
   const currentSquares = history[currentMove];
   const nextX = currentMove % 2 === 0;
 
-  function handlePlay(nextSquares) {
+  function handlePlay(nextSquares, i) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
+    const nextMoveHistory = [...moveHistory.slice(0, currentMove), (Math.floor(i / 3) + 1) + "," + (i % 3 + 1)];
+    setMoveHistory(nextMoveHistory);
     setCurrentMove(nextHistory.length - 1);
   }
 
@@ -78,9 +82,11 @@ export default function Game() {
 
   const moves = history.map((_, move) => {
     let desc = move == currentMove ? "You are Here!" : move ? `Go to move #${move}` : "Go to game start";
+    let [row, col] = moveHistory[move - 1]?.split(",") || [];
     return (
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{desc}</button>
+      <li key={move} style={{ marginBottom: "10px", listStyle: "none" }}>
+        <button onClick={() => jumpTo(move)}> {desc} </button>
+        {move ? ( <div>Row: {row}, Col: {col}</div> ) : null}
       </li>
     );
   })
