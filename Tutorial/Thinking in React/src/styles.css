@@ -1,0 +1,70 @@
+body {
+  padding: 5px;
+  margin: 20px;
+  color: #fff;
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  background-image: linear-gradient(to right bottom, #505050, #000000);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 22px;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+h4 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+h5 {
+  margin-top: 0;
+  font-size: 14px;
+}
+
+h6 {
+  margin-top: 0;
+  font-size: 12px;
+}
+
+code {
+  font-size: 1.2em;
+}
+
+ul {
+  padding-inline-start: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+th {
+  padding-top: 10px;
+}
+
+td {
+  padding: 0px 20px;
+}
+
+td.price {
+  text-align: right;
+  color: green;
+}
